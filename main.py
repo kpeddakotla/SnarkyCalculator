@@ -1,7 +1,12 @@
+import pygame
+import pytube
 import random
 import time
 import tkinter as tk
-import webbrowser
+
+pygame.init()
+pygame.mixer.music.load("XXXTENTACION - Moonlight (Super Slow 0,75x).mp3")
+pygame.mixer.music.set_volume(0.25)
 
 
 def calculate():
@@ -39,6 +44,11 @@ def calculate():
         comment_label['text'] = "I'm not sure what you did, but it was definitely wrong."
 
     # Choose a comment based on the result
+    if result == 420:
+        pygame.mixer.music.play()
+    else:
+        pygame.mixer.music.stop()
+
     if result == 917:
         comment_label['text'] = "You get the feeling this might be someone's favorite number..."
         comment_label['text'] += "\n"
@@ -49,15 +59,22 @@ def calculate():
         comment_label['text'] += "\nNOBODY"
         comment_label['text'] += "\nSHOW"
         comment_label['text'] += "\nAARON!!!!"
+    elif result == 528:
+        comment_label['text'] = "Oh my god you got a secret number!"
+        comment_label['text'] += "\n"
+        comment_label['text'] += "\nI wonder why this number has significance though..."
     elif result == 36:
         comment_label['text'] = "I wonder how Aaron's car is doing."
-    elif result == 8008:
+    elif result == 420:
+        comment_label['text'] = "ahhhhhh shiitttttttt"
+    elif result == 8008 or result == 80085:
         comment_label['text'] = "heehee"
     elif result == 20:
         random_number = random.randint(1, 20)
         comment_label['text'] = f"You rolled a {random_number}!"
         if random_number == 1:
-            comment_label['text'] += "\nOooh. Well. I think you died. "
+            time.sleep(1)
+            comment_label['text'] += "\nOoh. Well. I think you died. "
             time.sleep(5)
             root.destroy()
         elif random_number == 20:
@@ -67,36 +84,47 @@ def calculate():
         elif random_number >= 10:
             comment_label['text'] += "\nYou do... some damage."
     elif result < 0:
-        comment_label['text'] = "Let's try to be more positive, okay?"
+        comment_label['text'] = "Let's TRY to be more positive, okay?"
     elif result == 0:
-        comment_label['text'] = "Well, at least you didn't mess up."
+        comment_label['text'] = "Look its the amount of friends you have!"
     else:
-        comment_label['text'] += "\nLooks like you know your stuff!"
-        comment_label['text'] += "\nKeep up the good work!"
+        comment_label['text'] += "\nLook at you go!"
+        comment_label['text'] += "\nProud of you cuz."
 
 
 # Create the window
 root = tk.Tk()
+root['bg'] = "#222"
 root.title("Calculator")
-root.geometry("1000x720")
+root.geometry("500x600")
 
-# Create the input field
-input_field = tk.Entry(root, font=("Arial", 24), width=50)
-input_field.grid(row=0, column=0, columnspan=2, padx=20, pady=20)
+# Set the rows and columns to scale with the window size
+for i in range(6):
+    root.grid_rowconfigure(i, weight=1)
+    root.grid_columnconfigure(i, weight=1)
 
-# Create the calculate button
-calculate_button = tk.Button(root, text="Calculate", font=("Arial", 24), command=calculate)
-calculate_button.grid(row=1, column=0, padx=20, pady=20)
-calculate_button.grid(row=1, column=0, columnspan=2, padx=20, pady=20, sticky="nsew")
+# Create the title label
+title_label = tk.Label(root, text="The Snarky Calculator", font=("Helvetica", "30"), fg="#fff", bg='#222', wraplength=450)
+title_label.grid(row=0, column=0, columnspan=2, padx=20, pady=0, sticky="n")
+title_label = tk.Label(root, text="By Kushal P.", font=("Helvetica", "15"), fg="#fff", bg='#222', wraplength=450)
+title_label.grid(row=1, column=0, columnspan=2, padx=20, pady=0, sticky="n")
 
-# Create the result label
-result_label = tk.Label(root, font=("Arial", 24), width=50)
-result_label.grid(row=2, column=0, columnspan=2, padx=20, pady=60)
-result_label.grid(row=2, column=0, columnspan=2, padx=20, pady=60, sticky="nsew")
+# Create the input field with a dark foreground color
+input_field = tk.Entry(root, font=("Helvetica", 24), width=50, justify="center")
+input_field.grid(row=2, column=0, columnspan=2, padx=20, pady=20, sticky="n")
 
-# Create the comment label
-comment_label = tk.Label(root, font=("Arial", 24), width=50)
-comment_label.grid(row=3, column=0, columnspan=2, padx=20, pady=120)
+# Create the calculate button with a smaller width
+calculate_button = tk.Button(root, text="Calculate", font=("Helvetica", 24), width=20, command=calculate, fg="#fff",
+                             bg='#222')
+calculate_button.grid(row=3, column=0, columnspan=2, padx=20, pady=20, sticky="n")
+
+# Create the result label with a dark foreground color
+result_label = tk.Label(root, font=("Helvetica", 16), width=50, fg="#fff", bg='#222', wraplength=450)
+result_label.grid(row=4, column=0, columnspan=2, padx=20, pady=10, sticky="n")
+
+# Create the comment label with a dark foreground color
+comment_label = tk.Label(root, font=("Helvetica", 16), width=50, fg="#fff", bg='#222', wraplength=450)
+comment_label.grid(row=5, column=0, columnspan=2, padx=20, pady=60, sticky="n")
 
 # Start the window loop
 root.mainloop()
