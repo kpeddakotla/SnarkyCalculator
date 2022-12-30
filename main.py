@@ -4,11 +4,6 @@ import tkinter as tk
 import webbrowser
 
 
-def open_link(event):
-    # Open the URL in the default web browser
-    webbrowser.open("https://admissions.pitt.edu/")
-
-
 def calculate():
     # Get the user's input
     equation = input_field.get()
